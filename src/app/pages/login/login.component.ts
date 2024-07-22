@@ -8,7 +8,18 @@ import { SpotifyService } from 'src/app/services/Spotify.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private spotifyService: SpotifyService) {}
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.verficiarTokenUrlCallback();
+  }
+
+  verficiarTokenUrlCallback() {
+    const token = this.spotifyService.obterTokenUrlCallback();
+
+    if (!!token) {
+      this.spotifyService.definirAccessToken(token);
+    }
+  }
 
   abrirPaginaLogin() {
     window.location.href = this.spotifyService.obterUrlLogin();
